@@ -36,7 +36,10 @@ env/
 backend/uploads/*.jpg
 backend/uploads/*.jpeg
 backend/uploads/*.png
+backend/uploads/*.webp
 backend/uploads/*.mp4
+backend/uploads/*.avi
+backend/uploads/*.mov
 backend/results/*.jpg
 backend/results/*.jpeg
 backend/results/*.png
