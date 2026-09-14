@@ -1,0 +1,55 @@
+================================================================================
+  AutoPlate AI - How to Push to GitHub
+================================================================================
+
+EASIEST METHOD - Double Click:
+------------------------------
+1. Find this file: push_to_github.bat
+2. RIGHT-CLICK on it → Edit
+3. Change "your-email@gmail.com" to YOUR REAL EMAIL
+4. Save and close
+5. DOUBLE-CLICK push_to_github.bat
+6. When asked for password, use your GitHub Personal Access Token
+
+GET TOKEN HERE: https://github.com/settings/tokens
+- Click "Generate new token (classic)"
+- Name it: AutoPlate AI
+- Check the "repo" box
+- Copy the token
+- Use it as your password
+
+================================================================================
+
+MANUAL METHOD - Copy and Paste:
+-------------------------------
+1. Open Command Prompt or PowerShell
+2. Copy these commands ONE BY ONE:
+
+cd "a:\ai trafic"
+git config --global user.email "YOUR-EMAIL@gmail.com"
+git config --global user.name "Abinesh"
+git init
+git add .
+git commit -m "Initial commit: AutoPlate AI"
+git branch -M main
+git remote add origin https://github.com/abinesh-0/autoplaite.git
+git push -u origin main
+
+3. Replace YOUR-EMAIL@gmail.com with your real email!
+
+================================================================================
+
+AFTER PUSHING:
+-------------
+Check your code at: https://github.com/abinesh-0/autoplaite
+
+================================================================================
+
+NEED HELP?
+----------
+Read these files:
+- QUICKSTART.md (Quick guide)
+- GITHUB_SETUP.md (Detailed Git guide)
+- DEPLOY.md (How to deploy to web)
+
+================================================================================

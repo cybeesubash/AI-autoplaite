@@ -1,0 +1,12 @@
+# YOLOv8 Dataset Configuration for Vehicle Number Plate Detection
+path: ../dataset   # dataset root directory (relative to train script or absolute)
+train: images/train
+val: images/val
+test: images/test
+
+# Number of classes
+nc: 1
+
+# Class names
+names:
+  0: number_plate

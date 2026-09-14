@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Uploads and Results (generated files)
+backend/uploads/*.jpg
+backend/uploads/*.jpeg
+backend/uploads/*.png
+backend/uploads/*.mp4
+backend/results/*.jpg
+backend/results/*.jpeg
+backend/results/*.png
+
+# Keep directory structure
+!backend/uploads/.gitkeep
+!backend/results/.gitkeep
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Model files (too large for git)
+*.pt
+*.pth
+*.weights
+*.onnx
+
+# Environment variables
+.env
+.env.local
+
+# Temporary files
+*.tmp
+*.temp

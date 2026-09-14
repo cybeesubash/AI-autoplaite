@@ -1,0 +1,75 @@
+╔════════════════════════════════════════════════════════════╗
+║          🚗 AutoPlate AI Landing Page 🚗                   ║
+║                                                            ║
+║  AI-Powered Vehicle Number Plate Detection & Recognition  ║
+╚════════════════════════════════════════════════════════════╝
+
+📂 You're in the landing page folder!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 HOW TO VIEW THE LANDING PAGE:
+
+Option 1: Direct Open (Easiest)
+   → Double-click index.html
+   → It will open in your default browser
+
+Option 2: With Flask Backend (Recommended)
+   1. Start your Flask backend server (port 5000)
+   2. Open browser and go to:
+      http://127.0.0.1:5000/landing/
+
+Option 3: Simple Python Server
+   1. Open terminal in this folder
+   2. Run: python -m http.server 8080
+   3. Open: http://localhost:8080
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📸 HOW TO ADD YOUR REAL PHOTOS:
+
+1. Prepare your photos:
+   - Front-facing professional photo
+   - Square crop (1:1 ratio)
+   - Save as JPG
+
+2. Add to assets/ folder:
+   landing/assets/abinesh.jpg   ← Abinesh's photo
+   landing/assets/vishwa.jpg    ← Vishwa's photo
+   landing/assets/praveen.jpg   ← Praveen's photo
+
+3. Refresh the page — photos will appear automatically!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ FEATURES:
+
+✅ Dark cyber-tech theme with glassmorphism
+✅ Animated particle background
+✅ Plate scanner with laser animation
+✅ Professional team section
+✅ Fully responsive (mobile/tablet/desktop)
+✅ Smooth scroll animations
+✅ Hover effects on all cards
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 FILES:
+
+index.html    → Main landing page
+styles.css    → All styles (glassmorphism theme)
+script.js     → Interactive animations
+README.md     → Detailed documentation
+assets/       → Photos and images
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 QUICK START:
+
+Just double-click index.html and enjoy! 🚀
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Built with ❤️ by Abinesh, Vishwa & Praveen
+
+© 2026 AutoPlate AI

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPlate AI - Complete System</title>
+    <link rel="stylesheet" href="complete-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-overlay"></div>
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🚗</span>
+                <span class="logo-text">AutoPlate AI</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#team" class="nav-link">Team</a></li>
+                <li><a href="#detection" class="nav-link">Detection</a></li>
+            </ul>
+            <a href="#detection" class="btn-primary nav-btn">Try Detection</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    AI-Powered Recognition System
+                </div>
+                <h1 class="hero-title">
+                    Smart Vehicle<br>
+                    Number Plate<br>
+                    <span class="gradient-text">Recognition</span>
+                </h1>
+                <p class="hero-subtitle">
+                    An AI-powered vehicle number plate detection and recognition system 
+                    using Deep Learning, Computer Vision and OCR.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#detection" class="btn-primary btn-large">
+                        <span>Try Plate Detection</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#team" class="btn-secondary btn-large">
+                        <span>Meet The Team</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="plate-scanner">
+                    <div class="scanner-frame">
+                        <div class="corner corner-tl"></div>
+                        <div class="corner corner-tr"></div>
+                        <div class="corner corner-bl"></div>
+                        <div class="corner corner-br"></div>
+                        
+                        <div class="plate-display">
+                            <div class="plate-content">
+                                <span class="plate-text">TN 38 AB 1234</span>
+                            </div>
+                        </div>
+                        
+                        <div class="scan-line"></div>
+                    </div>
+                    
+                    <div class="tech-labels">
+                        <div class="tech-label" style="animation-delay: 0.2s;">
+                            <span class="tech-icon">◆</span>
+                            <span>YOLOv8</span>
+                        </div>
+                        <div class="tech-label" style="animation-delay: 0.4s;">
+                            <span class="tech-icon">◆</span>
+                            <span>OpenCV</span>
+                        </div>
+                        <div class="tech-label" style="animation-delay: 0.6s;">
+                            <span class="tech-icon">◆</span>
+                            <span>OCR</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Highlights -->
+    <section class="features-compact">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>AI Detection</h3>
+                <p>YOLOv8-based number plate detection</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔤</div>
+                <h3>OCR Recognition</h3>
+                <p>Tesseract-powered character recognition</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👁</div>
+                <h3>Computer Vision</h3>
+                <p>OpenCV image preprocessing</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Smart Results</h3>
+                <p>Fast detection and recognition results</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="team-container">
+            <div class="section-header">
+                <h2 class="section-title">Meet Our Team</h2>
+                <p class="section-subtitle">
+                    Built by a team of passionate engineering students exploring 
+                    Artificial Intelligence and Computer Vision.
+                </p>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Team Member 1: Abinesh -->
+                <div class="team-card">
+                    <div class="team-photo-wrapper">
+                        <div class="photo-glow"></div>
+                        <div class="team-photo">
+                            <img src="assets/abinesh.jpg" alt="Abinesh" onerror="this.src='assets/placeholder-1.svg'">
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Abinesh</h3>
+                        <p class="team-degree">B.Tech Artificial Intelligence and Data Science</p>
+                        <p class="team-year">3rd Year</p>
+                        <div class="team-role">
+                            <span class="role-badge">AI / Full Stack Developer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2: Vishwa -->
+                <div class="team-card">
+                    <div class="team-photo-wrapper">
+                        <div class="photo-glow"></div>
+                        <div class="team-photo">
+                            <img src="assets/vishwa.jpg" alt="Vishwa" onerror="this.src='assets/placeholder-2.svg'">
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Vishwa</h3>
+                        <p class="team-degree">B.E. Artificial Intelligence</p>
+                        <p class="team-year">3rd Year</p>
+                        <div class="team-role">
+                            <span class="role-badge">Team Member</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3: Praveen -->
+                <div class="team-card">
+                    <div class="team-photo-wrapper">
+                        <div class="photo-glow"></div>
+                        <div class="team-photo">
+                            <img src="assets/praveen.jpg" alt="Praveen" onerror="this.src='assets/placeholder-3.svg'">
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Praveen</h3>
+                        <p class="team-degree">Engineering</p>
+                        <p class="team-year">3rd Year</p>
+                        <div class="team-role">
+                            <span class="role-badge">Team Member</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detection Section -->
+    <section class="detection" id="detection">
+        <div class="detection-container">
+            <div class="section-header">
+                <h2 class="section-title">Vehicle Number Plate Detection</h2>
+                <p class="section-subtitle">
+                    Upload an image or video to detect and recognize vehicle number plates with AI
+                </p>
+            </div>
+
+            <!-- Embed Existing Detection App -->
+            <div class="detection-embed">
+                <iframe 
+                    id="detectionFrame" 
+                    src="../frontend/index.html" 
+                    frameborder="0"
+                    title="AutoPlate AI Detection System">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>AutoPlate AI</h3>
+                <p>AI-Powered Vehicle Number Plate Detection & Recognition</p>
+            </div>
+            <div class="footer-team">
+                <p class="team-list">Abinesh • Vishwa • Praveen</p>
+            </div>
+            <div class="footer-copyright">
+                <p>© 2026 AutoPlate AI</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="complete-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPlate AI - Vehicle Number Plate Detection & Recognition</title>
+    <meta name="description" content="AI-Powered Vehicle Number Plate Detection, Recognition & Public Information Search System using YOLO, Computer Vision, and OCR.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Ambient Glows -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <!-- ============= NAVBAR ============= -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="brand-logo">
+                <span class="logo-icon">🚗</span> AutoPlate <span>AI</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#team" class="nav-link">Team</a></li>
+                <li><a href="#detect" class="nav-link">AI Detection</a></li>
+                <li><a href="#search" class="nav-link">Plate Search</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="server-badge" id="serverStatusBadge">
+                    <span class="status-dot"></span>
+                    <span id="serverStatusText">Connecting API...</span>
+                </div>
+                <button class="icon-btn" id="infoBtn" title="System Information">
+                    <i class="fa-solid fa-circle-info"></i>
+                </button>
+                <a href="#detect" class="btn-primary" id="nav-cta">Try Detection</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============= HERO SECTION ============= -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-sparkles"></i> AI-Powered Recognition System
+                </div>
+                <h1>Smart Vehicle<br><span class="highlight">Number Plate Recognition</span></h1>
+                <p class="hero-subtitle">
+                    End-to-end vehicle license plate detection and public information search powered by Deep Learning, Computer Vision, and high-accuracy OCR.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#detect" class="btn btn-glow btn-large">
+                        <i class="fa-solid fa-camera"></i> Try Plate Detection
+                    </a>
+                    <a href="#search" class="btn btn-outline btn-large">
+                        <i class="fa-solid fa-magnifying-glass"></i> Live Plate Search
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value">YOLOv8</span>
+                        <span class="stat-label">Object Detection</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-value">EasyOCR</span>
+                        <span class="stat-label">Text Extraction</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-value">Flask API</span>
+                        <span class="stat-label">REST Microservice</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-value">VAHAN</span>
+                        <span class="stat-label">RTO Database</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="scanner-box">
+                    <div class="scan-corners">
+                        <span class="corner tl"></span>
+                        <span class="corner tr"></span>
+                        <span class="corner bl"></span>
+                        <span class="corner br"></span>
+                    </div>
+                    <div class="plate-display">
+                        <span class="plate-flag">🇮🇳 IND</span>
+                        <span class="plate-text" id="plate-demo">TN 38 AB 1234</span>
+                    </div>
+                    <div class="laser-line"></div>
+                    <div class="scan-label"><i class="fa-solid fa-radar"></i> AI SCANNING ACTIVE...</div>
+                    <div class="tech-chips">
+                        <span class="tech-chip">YOLOv8</span>
+                        <span class="tech-chip">OpenCV</span>
+                        <span class="tech-chip">OCR</span>
+                        <span class="tech-chip">VAHAN</span>
+                    </div>
+                </div>
+                <div class="floating-info info-1">
+                    <span class="info-dot green"></span> License Plate Localized
+                </div>
+                <div class="floating-info info-2">
+                    <span class="info-dot cyan"></span> Detection Confidence: 98.4%
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============= FEATURES SECTION ============= -->
+    <section class="features" id="features">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Capabilities</span>
+                <h2>Cutting-Edge Computer Vision</h2>
+                <p>Designed for real-world road conditions, multi-angle vehicle views, and complex lighting.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-bolt text-cyan"></i></div>
+                    <h3>YOLO Detection</h3>
+                    <p>Accurately localizes vehicle boundaries and license plate regions in complex scenes with sub-second latency.</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-font text-blue"></i></div>
+                    <h3>Multi-Engine OCR</h3>
+                    <p>Hybrid OCR combining EasyOCR, Tesseract, and morphological contour filters tailored for Indian plate fonts.</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-eye text-emerald"></i></div>
+                    <h3>Adaptive Preprocessing</h3>
+                    <p>OpenCV pipeline with CLAHE, bilateral filtering, Otsu thresholding, and perspective correction.</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-globe text-amber"></i></div>
+                    <h3>Automated Public Search</h3>
+                    <p>Extracts RTO office codes, district jurisdiction, state registration series, and public search references.</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-film text-rose"></i></div>
+                    <h3>Video Stream Analysis</h3>
+                    <p>Processes MP4, AVI, and MOV video feeds with intelligent keyframe sampling to capture the clearest plate view.</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-chart-pie text-cyan"></i></div>
+                    <h3>Visual Inspection Suite</h3>
+                    <p>Full 4-quadrant visual breakdown: Original Scene, YOLO Box, Cropped Plate ROI, and Binary Preprocessed view.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============= ABOUT SECTION ============= -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <span class="section-tag">About the Project</span>
+                    <h2>Indian Vehicle Registration Intelligence</h2>
+                    <p>
+                        AutoPlate AI is an advanced automated number plate recognition (ANPR) and public information retrieval framework developed specifically for Indian traffic ecosystems. It handles standard high-security registration plates (HSRP), vintage formats, commercial yellow plates, and electric vehicle green plates.
+                    </p>
+                    <ul class="about-list">
+                        <li><span class="check">✓</span> High-confidence plate localization from single photos or continuous video</li>
+                        <li><span class="check">✓</span> Automated RTO district decoding (e.g., TN-38 Coimbatore, KA-01 Bangalore)</li>
+                        <li><span class="check">✓</span> REST API microservice architecture with async multi-query search</li>
+                        <li><span class="check">✓</span> Privacy-preserving public lookup without exposing personal citizen records</li>
+                    </ul>
+                    <a href="#detect" class="btn btn-glow"><i class="fa-solid fa-arrow-right"></i> Launch Detection Engine</a>
+                </div>
+                <div class="about-visual glass-card">
+                    <div class="tech-stack">
+                        <h4>Pipeline Architecture Performance</h4>
+                        <div class="tech-item">
+                            <span class="tech-name">YOLO Detection</span>
+                            <div class="tech-bar"><div class="tech-fill" style="width:96%"></div></div>
+                            <span class="tech-pct">96%</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">OpenCV Filters</span>
+                            <div class="tech-bar"><div class="tech-fill" style="width:92%"></div></div>
+                            <span class="tech-pct">92%</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">OCR Accuracy</span>
+                            <div class="tech-bar"><div class="tech-fill" style="width:90%"></div></div>
+                            <span class="tech-pct">90%</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">Flask REST API</span>
+                            <div class="tech-bar"><div class="tech-fill" style="width:98%"></div></div>
+                            <span class="tech-pct">98%</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-name">RTO Parsing</span>
+                            <div class="tech-bar"><div class="tech-fill" style="width:99%"></div></div>
+                            <span class="tech-pct">99%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============= TEAM SECTION ============= -->
+    <section class="team" id="team">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Project Creators</span>
+                <h2>Meet the Engineering Team</h2>
+                <p>Built with innovation by students specializing in Artificial Intelligence and Computer Vision.</p>
+            </div>
+            <div class="team-grid">
+                <!-- Abinesh -->
+                <div class="team-card glass-card">
+                    <div class="avatar-ring">
+                        <div class="avatar-circle" style="background: linear-gradient(135deg, #00f2fe, #4facfe);">
+                            <span>A</span>
+                        </div>
+                    </div>
+                    <h3>Abinesh</h3>
+                    <p class="degree">B.Tech – AI & Data Science</p>
+                    <p class="year-tag">3rd Year</p>
+                    <div class="role-badge">AI / Full Stack Developer</div>
+                </div>
+
+                <!-- Vishwa -->
+                <div class="team-card glass-card">
+                    <div class="avatar-ring">
+                        <div class="avatar-circle" style="background: linear-gradient(135deg, #10b981, #00f2fe);">
+                            <span>V</span>
+                        </div>
+                    </div>
+                    <h3>Vishwa</h3>
+                    <p class="degree">B.Tech AIDS</p>
+                    <p class="year-tag">3rd Year</p>
+                    <div class="role-badge">Team Member</div>
+                </div>
+
+                <!-- Praveen -->
+                <div class="team-card glass-card">
+                    <div class="avatar-ring">
+                        <div class="avatar-circle" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+                            <span>P</span>
+                        </div>
+                    </div>
+                    <h3>Praveen</h3>
+                    <p class="degree">B.Tech</p>
+                    <p class="year-tag">3rd Year</p>
+                    <div class="role-badge">Team Member</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============= DETECTION SECTION ============= -->
+    <section class="detect-section" id="detect">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">AI Detection Engine</span>
+                <h2>Vehicle Plate Detection & Information Extraction</h2>
+                <p>Upload a vehicle photo or video. The AI system will detect the number plate, extract characters, and collect all vehicle details.</p>
+            </div>
+
+            <div class="detect-main-container glass-card">
+                <!-- Mode Switcher -->
+                <div class="mode-tabs">
+                    <button class="mode-tab active" id="tabImage" type="button">
+                        <i class="fa-solid fa-image"></i> Image Upload
+                    </button>
+                    <button class="mode-tab" id="tabVideo" type="button">
+                        <i class="fa-solid fa-video"></i> Video Stream
+                    </button>
+                </div>
+
+                <!-- Drop & Upload Area -->
+                <div class="drop-zone" id="dropZone">
+                    <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg, image/webp" hidden>
+                    
+                    <!-- Idle State -->
+                    <div class="drop-idle" id="dropIdle">
+                        <div class="drop-icon">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <h3>Drag & Drop Vehicle Image or Video</h3>
+                        <p>or <span class="browse-link">browse files</span> from your computer</p>
+                        <span class="format-hint" id="formatHint">Supports: JPG, PNG, WEBP (Max 50MB)</span>
+                    </div>
+
+                    <!-- Preview State -->
+                    <div class="drop-preview hidden" id="dropPreview">
+                        <div class="preview-media-wrapper">
+                            <img id="imagePreview" class="preview-media hidden" alt="Selected Vehicle Preview">
+                            <video id="videoPreview" class="preview-media hidden" controls></video>
+                        </div>
+                        <div class="file-meta">
+                            <div class="file-info-text">
+                                <span class="file-name" id="fileName">vehicle.jpg</span>
+                                <span class="file-size" id="fileSize">2.4 MB</span>
+                            </div>
+                            <button type="button" class="btn-remove" id="removeFileBtn" title="Remove File">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="detect-actions">
+                    <button class="btn btn-glow btn-large" id="detectBtn" disabled>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Run AI Detection
+                    </button>
+                    <button class="btn btn-outline" id="resetBtn" type="button">
+                        <i class="fa-solid fa-rotate-left"></i> Reset
+                    </button>
+                </div>
+
+                <!-- Pipeline Progress & Timeline -->
+                <div class="progress-container hidden" id="progressContainer">
+                    <div class="progress-header">
+                        <span class="progress-msg" id="progressMsg">Initializing pipeline...</span>
+                        <span class="progress-pct" id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" id="progressBarFill" style="width: 0%"></div>
+                    </div>
+                    <div class="pipeline-timeline">
+                        <div class="t-step" id="tstep1"><span class="t-dot"></span> 1. YOLO Detect</div>
+                        <div class="t-step" id="tstep2"><span class="t-dot"></span> 2. Crop & OCR</div>
+                        <div class="t-step" id="tstep3"><span class="t-dot"></span> 3. Format Parse</div>
+                        <div class="t-step" id="tstep4"><span class="t-dot"></span> 4. Web Search</div>
+                        <div class="t-step" id="tstep5"><span class="t-dot"></span> 5. Image Match</div>
+                        <div class="t-step" id="tstep6"><span class="t-dot"></span> 6. Summary</div>
+                    </div>
+                </div>
+
+                <!-- Error Alert -->
+                <div class="error-alert hidden" id="errorAlert">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span id="errorMsg">Detection error occurred.</span>
+                </div>
+
+                <!-- ============= RESULTS AREA ============= -->
+                <div class="results-wrapper" id="resultsArea">
+                    <!-- Empty State -->
+                    <div class="results-empty" id="resultsEmptyState">
+                        <div class="empty-icon"><i class="fa-solid fa-car-rear"></i></div>
+                        <h4>No Detection Results Yet</h4>
+                        <p>Upload a vehicle photo above and click <b>"Run AI Detection"</b> to extract the number plate and all vehicle details.</p>
+                        <span class="status-pill idle" id="resultStatusPill">Awaiting Input</span>
+                    </div>
+
+                    <!-- Populated Results State -->
+                    <div class="results-populated hidden" id="resultsPopulatedState">
+                        <!-- Plate Display Hero Banner -->
+                        <div class="plate-result-banner">
+                            <div class="plate-main-card">
+                                <div class="plate-flag-strip">
+                                    <span class="country-flag" id="badgeFlag">🇮🇳</span>
+                                    <span class="country-code" id="badgeCountryCode">IND</span>
+                                </div>
+                                <div class="plate-number-box">
+                                    <span class="plate-number-text" id="plateNumberDisplay">TN 38 AB 1234</span>
+                                </div>
+                            </div>
+                            <div class="plate-badges">
+                                <div class="badge-tag valid" id="plateValidationBadge">
+                                    <i class="fa-solid fa-circle-check"></i> Valid Registration Format
+                                </div>
+                                <div class="confidence-badge" id="plateConfidenceBadge">
+                                    <i class="fa-solid fa-gauge-high"></i> 96% Confidence
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4-Image Inspection Gallery -->
+                        <div class="images-inspection-section">
+                            <div class="section-subhead">
+                                <h4><i class="fa-solid fa-images"></i> Visual Inspection Pipeline</h4>
+                                <span class="hint">Click any frame to inspect high-resolution view</span>
+                            </div>
+                            <div class="quad-images-grid">
+                                <!-- 1. Original -->
+                                <div class="quad-card">
+                                    <div class="quad-header">
+                                        <span class="quad-title">1. Original Upload</span>
+                                        <span class="quad-tag">Full Scene</span>
+                                    </div>
+                                    <div class="quad-img-wrap">
+                                        <img id="originalImage" alt="Original Upload" src="" loading="lazy">
+                                    </div>
+                                </div>
+
+                                <!-- 2. Annotated -->
+                                <div class="quad-card">
+                                    <div class="quad-header">
+                                        <span class="quad-title">2. YOLO Bounding Box</span>
+                                        <button type="button" class="zoom-btn" id="expandAnnotatedBtn" title="Enlarge"><i class="fa-solid fa-expand"></i></button>
+                                    </div>
+                                    <div class="quad-img-wrap">
+                                        <img id="annotatedImage" alt="YOLO Annotated" src="" loading="lazy">
+                                    </div>
+                                </div>
+
+                                <!-- 3. Cropped Plate -->
+                                <div class="quad-card">
+                                    <div class="quad-header">
+                                        <span class="quad-title">3. Cropped Plate ROI</span>
+                                        <button type="button" class="zoom-btn" id="expandCropBtn" title="Enlarge"><i class="fa-solid fa-expand"></i></button>
+                                    </div>
+                                    <div class="quad-img-wrap">
+                                        <img id="croppedPlateImage" alt="Cropped Plate" src="" loading="lazy">
+                                    </div>
+                                </div>
+
+                                <!-- 4. Preprocessed Binary -->
+                                <div class="quad-card">
+                                    <div class="quad-header">
+                                        <span class="quad-title">4. OpenCV Binary Filter</span>
+                                        <button type="button" class="zoom-btn" id="expandPrepBtn" title="Enlarge"><i class="fa-solid fa-expand"></i></button>
+                                    </div>
+                                    <div class="quad-img-wrap">
+                                        <img id="preprocessedPlateImage" alt="Preprocessed Binary" src="" loading="lazy">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Result Details Tabs -->
+                        <div class="results-tabs-wrapper">
+                            <div class="results-tab-nav">
+                                <button class="rtab-btn active" data-tab="tab-overview" type="button">
+                                    <i class="fa-solid fa-table-list"></i> Overview & OCR
+                                </button>
+                                <button class="rtab-btn" data-tab="tab-rto" type="button">
+                                    <i class="fa-solid fa-id-card"></i> VAHAN & RTO Details
+                                </button>
+                                <button class="rtab-btn" data-tab="tab-web" type="button">
+                                    <i class="fa-solid fa-globe"></i> Public Web Results
+                                </button>
+                                <button class="rtab-btn" data-tab="tab-images" type="button">
+                                    <i class="fa-solid fa-camera"></i> Public Images & Lens
+                                </button>
+                                <button class="rtab-btn" data-tab="tab-related" type="button">
+                                    <i class="fa-solid fa-link"></i> Related References
+                                </button>
+                                <button class="rtab-btn" data-tab="tab-sources" type="button">
+                                    <i class="fa-solid fa-quote-left"></i> Verified Sources
+                                </button>
+                            </div>
+
+                            <!-- TAB 1: OVERVIEW & OCR -->
+                            <div class="rtab-content" id="tab-overview">
+                                <div class="details-grid">
+                                    <div class="detail-item">
+                                        <span class="d-label">Extracted Vehicle Number</span>
+                                        <span class="d-val text-cyan font-mono" id="resVehicleNumber">—</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="d-label">Series Code</span>
+                                        <span class="d-val font-mono" id="resSeries">—</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="d-label">Registration Digits</span>
+                                        <span class="d-val font-mono" id="resRegNum">—</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="d-label">YOLO Plate Detection Confidence</span>
+                                        <span class="d-val text-emerald" id="resDetectConf">—</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="d-label">OCR Recognition Confidence</span>
+                                        <span class="d-val text-blue" id="resOcrConf">—</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TAB 2: VAHAN & RTO DETAILS -->
+                            <div class="rtab-content hidden" id="tab-rto">
+                                <div class="vahan-card-grid">
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">Registration Number</span>
+                                        <span class="vahan-value highlight" id="vahanRegNum">—</span>
+                                        <span class="vahan-status verified"><i class="fa-solid fa-circle-check"></i> Verified Format</span>
+                                    </div>
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">Country Jurisdiction</span>
+                                        <span class="vahan-value" id="vahanCountry">—</span>
+                                        <span class="vahan-status verified"><i class="fa-solid fa-circle-check"></i> Standard Format</span>
+                                    </div>
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">State / Union Territory</span>
+                                        <span class="vahan-value" id="vahanState">—</span>
+                                        <span class="vahan-status verified"><i class="fa-solid fa-circle-check"></i> Official State</span>
+                                    </div>
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">RTO District Code</span>
+                                        <span class="vahan-value font-mono" id="vahanRtoCode">—</span>
+                                        <span class="vahan-status verified"><i class="fa-solid fa-circle-check"></i> RTO Index</span>
+                                    </div>
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">Registration Area</span>
+                                        <span class="vahan-value" id="vahanArea">—</span>
+                                        <span class="vahan-status verified"><i class="fa-solid fa-circle-check"></i> Regional Office</span>
+                                    </div>
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">RTO Location Address</span>
+                                        <span class="vahan-value" id="vahanPlace">—</span>
+                                        <span class="vahan-status verified"><i class="fa-solid fa-circle-check"></i> Verified Jurisdiction</span>
+                                    </div>
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">Vehicle Category</span>
+                                        <span class="vahan-value" id="vahanVehicleType">—</span>
+                                        <span class="vahan-status verified"><i class="fa-solid fa-circle-check"></i> AI Classification</span>
+                                    </div>
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">Detection Confidence</span>
+                                        <span class="vahan-value text-cyan" id="vahanDetectConf">—</span>
+                                        <span class="vahan-status verified"><i class="fa-solid fa-circle-check"></i> YOLO Bounding</span>
+                                    </div>
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">OCR Confidence</span>
+                                        <span class="vahan-value text-emerald" id="vahanOcrConf">—</span>
+                                        <span class="vahan-status verified"><i class="fa-solid fa-circle-check"></i> Character Match</span>
+                                    </div>
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">Information Source</span>
+                                        <span class="vahan-value" id="vahanSource">Public Transport Registries</span>
+                                        <span class="vahan-status verified"><i class="fa-solid fa-circle-check"></i> Public Database</span>
+                                    </div>
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">Owner Personal Details</span>
+                                        <span class="vahan-value">Not Available</span>
+                                        <span class="vahan-status privacy"><i class="fa-solid fa-user-shield"></i> Strictly Privacy Protected</span>
+                                    </div>
+                                    <div class="vahan-item">
+                                        <span class="vahan-label">Registered Phone / Address</span>
+                                        <span class="vahan-value">Not Available</span>
+                                        <span class="vahan-status privacy"><i class="fa-solid fa-user-shield"></i> Strictly Privacy Protected</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TAB 3: PUBLIC WEB RESULTS -->
+                            <div class="rtab-content hidden" id="tab-web">
+                                <div class="public-web-list" id="publicWebContainer"></div>
+                            </div>
+
+                            <!-- TAB 4: PUBLIC IMAGES & LENS -->
+                            <div class="rtab-content hidden" id="tab-images">
+                                <div class="lens-tags-bar" id="lensTagsContainer"></div>
+                                <div class="public-images-grid" id="publicImagesGrid"></div>
+                            </div>
+
+                            <!-- TAB 5: RELATED PAGES -->
+                            <div class="rtab-content hidden" id="tab-related">
+                                <div class="public-web-list" id="relatedPagesContainer"></div>
+                            </div>
+
+                            <!-- TAB 6: SOURCES -->
+                            <div class="rtab-content hidden" id="tab-sources">
+                                <div id="sourcesListContainer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============= LIVE PLATE SEARCH SECTION ============= -->
+    <section class="plate-search-section" id="search">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Direct Lookup Tool</span>
+                <h2>Live Vehicle Plate Search</h2>
+                <p>Type any Indian vehicle registration number below to fetch RTO details, district jurisdiction, and public search references in real time.</p>
+            </div>
+
+            <div class="search-panel glass-card">
+                <!-- Search Input with Mirror -->
+                <div class="search-bar-wrapper">
+                    <div class="plate-input-container">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="plateSearchInput" placeholder="e.g. TN 38 AB 1234 or DL 01 AB 1234" maxlength="16" autocomplete="off">
+                        <button type="button" class="btn-clear hidden" id="plateSearchClearBtn" title="Clear">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <button type="button" class="btn btn-glow" id="plateSearchBtn">Search</button>
+                    </div>
+
+                    <!-- Mirror stylized number plate -->
+                    <div class="plate-mirror" id="plateInputMirror"></div>
+
+                    <!-- Autocomplete dropdown -->
+                    <div class="autocomplete-dropdown hidden" id="plateAutocomplete">
+                        <div class="ac-list" id="plateAcList"></div>
+                    </div>
+                </div>
+
+                <!-- Quick Sample Chips -->
+                <div class="quick-chips-wrapper">
+                    <span class="chips-label">Try sample plates:</span>
+                    <button type="button" class="ps-chip" data-plate="TN38AB1234">TN 38 AB 1234</button>
+                    <button type="button" class="ps-chip" data-plate="DL01AB1234">DL 01 AB 1234</button>
+                    <button type="button" class="ps-chip" data-plate="KA05MJ5678">KA 05 MJ 5678</button>
+                    <button type="button" class="ps-chip" data-plate="MH12DE1433">MH 12 DE 1433</button>
+                    <button type="button" class="ps-chip" data-plate="KL07CD4567">KL 07 CD 4567</button>
+                </div>
+
+                <!-- Search States -->
+                <div class="ps-state-container">
+                    <!-- Idle State -->
+                    <div class="ps-state ps-idle" id="psStateIdle">
+                        <i class="fa-solid fa-keyboard"></i>
+                        <p>Start typing an Indian vehicle number plate above or click any sample chip to see instant details.</p>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div class="ps-state ps-loading hidden" id="psStateLoading">
+                        <div class="spinner"></div>
+                        <p id="psLoadingMsg">Searching across public transport registries & web...</p>
+                        <div class="engine-pills">
+                            <span class="ps-engine-pill" id="psEngGoogle"><i class="fa-brands fa-google"></i> Google</span>
+                            <span class="ps-engine-pill" id="psEngDDG"><i class="fa-solid fa-shield-halved"></i> DuckDuckGo</span>
+                            <span class="ps-engine-pill" id="psEngBing"><i class="fa-brands fa-microsoft"></i> Bing</span>
+                        </div>
+                    </div>
+
+                    <!-- Error State -->
+                    <div class="ps-state ps-error hidden" id="psStateError">
+                        <i class="fa-solid fa-circle-exclamation text-rose"></i>
+                        <p id="psErrorMsg">Search request failed.</p>
+                        <button type="button" class="btn btn-outline" id="psRetryBtn">Retry Search</button>
+                    </div>
+
+                    <!-- Results Panel -->
+                    <div class="ps-results-panel hidden" id="psResultsPanel">
+                        <!-- Registration Header Card -->
+                        <div class="ps-reg-header">
+                            <div class="ps-reg-plate">
+                                <span class="ps-flag" id="psRegFlag">🇮🇳</span>
+                                <span class="ps-num font-mono" id="psRegPlateText">TN38AB1234</span>
+                            </div>
+                            <div class="ps-reg-summary">
+                                <div class="ps-summary-pill"><i class="fa-solid fa-map-location-dot"></i> <span id="psRegState">Tamil Nadu</span></div>
+                                <div class="ps-summary-pill"><i class="fa-solid fa-city"></i> <span id="psRegArea">Coimbatore North</span></div>
+                                <div class="ps-summary-pill"><i class="fa-solid fa-id-card-clip"></i> <span id="psRegRto">TN38</span></div>
+                            </div>
+                            <div class="ps-tags-bar" id="psRegTags"></div>
+                        </div>
+
+                        <!-- Search Tabs -->
+                        <div class="ps-tabs-bar">
+                            <button type="button" class="ps-rtab active" data-pstab="psTabWeb">
+                                <i class="fa-solid fa-globe"></i> Web Results (<span id="psWebCount">0</span>)
+                            </button>
+                            <button type="button" class="ps-rtab" data-pstab="psTabVahan">
+                                <i class="fa-solid fa-car"></i> Registration Details
+                            </button>
+                            <button type="button" class="ps-rtab" data-pstab="psTabRelated">
+                                <i class="fa-solid fa-diagram-project"></i> Related Pages
+                            </button>
+                        </div>
+
+                        <!-- Search Tab Contents -->
+                        <div class="ps-tab-content" id="psTabWeb">
+                            <div class="ps-web-list" id="psWebResultsList"></div>
+                        </div>
+                        <div class="ps-tab-content hidden" id="psTabVahan">
+                            <div class="vahan-card-grid" id="psVahanGrid"></div>
+                        </div>
+                        <div class="ps-tab-content hidden" id="psTabRelated">
+                            <div class="ps-web-list" id="psRelatedList"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============= CTA SECTION ============= -->
+    <section class="cta">
+        <div class="section-container">
+            <div class="cta-card glass-card">
+                <h2>Ready to Try Smart Recognition?</h2>
+                <p>Test the full pipeline with vehicle photos, dashcam videos, or plate numbers.</p>
+                <a href="#detect" class="btn btn-glow btn-large">
+                    <i class="fa-solid fa-camera"></i> Start Detection Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============= FOOTER ============= -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>AutoPlate <span>AI</span></h3>
+                <p>AI-Powered Vehicle Number Plate Detection, Recognition & Public Information Search System</p>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#team">Team</a>
+                <a href="#detect">Detection</a>
+                <a href="#search">Search</a>
+            </div>
+            <div class="footer-copy">
+                © 2026 AutoPlate AI. Built with ❤️ by Abinesh, Vishwa & Praveen.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============= IMAGE ZOOM MODAL ============= -->
+    <div class="modal-overlay hidden" id="imageModal">
+        <div class="modal-container glass-card">
+            <div class="modal-top">
+                <h4 id="modalTitle">Image Inspection</h4>
+                <button type="button" class="modal-close" id="modalCloseBtn" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Enlarged View">
+            </div>
+        </div>
+    </div>
+
+    <!-- ============= SYSTEM INFO MODAL ============= -->
+    <div class="modal-overlay hidden" id="infoModal">
+        <div class="modal-container glass-card info-modal-box">
+            <div class="modal-top">
+                <h4><i class="fa-solid fa-circle-info text-cyan"></i> About AutoPlate AI</h4>
+                <button type="button" class="modal-close" id="infoModalCloseBtn" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body text-content">
+                <p><b>AutoPlate AI</b> is an academic research and engineering demonstration system developed for AI-based Indian vehicle number plate detection, OCR recognition, and public registration area lookup.</p>
+                <div class="info-badges">
+                    <span class="badge-pill">YOLOv8 Object Detection</span>
+                    <span class="badge-pill">EasyOCR & Tesseract</span>
+                    <span class="badge-pill">OpenCV Vision Pipeline</span>
+                    <span class="badge-pill">Flask REST API</span>
+                </div>
+                <h5>Team Members:</h5>
+                <ul>
+                    <li><b>Abinesh</b> – B.Tech AI & Data Science (AI / Full Stack Developer)</li>
+                    <li><b>Vishwa</b> – B.Tech AIDS (Team Member)</li>
+                    <li><b>Praveen</b> – B.Tech (Team Member)</li>
+                </ul>
+                <p class="disclaimer"><small><i class="fa-solid fa-shield-halved"></i> <b>Privacy Notice:</b> All data retrieved is strictly derived from public transport registry jurisdiction schemas and search indexes. No personal citizen contact or sensitive biometric details are queried or stored.</small></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
