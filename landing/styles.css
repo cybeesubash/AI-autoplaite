@@ -606,8 +606,8 @@ ul { list-style: none; }
     gap: 0.6rem;
 }
 .avatar-ring {
-    width: 84px;
-    height: 84px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     padding: 3px;
     background: linear-gradient(135deg, var(--cyan), var(--blue));
@@ -623,10 +623,19 @@ ul { list-style: none; }
     font-size: 1.8rem;
     font-weight: 800;
     color: #fff;
+    overflow: hidden;
+}
+.avatar-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
 }
 .team-card h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
 }
 .team-card .degree {
     font-size: 0.82rem;
