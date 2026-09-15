@@ -3,6 +3,12 @@ services:
     name: autoplate-ai
     env: python
     plan: starter
+    rootDir: .                      # repo root = autoplaite-main folder; leave default (no subdir)
     buildCommand: pip install -r requirements.txt
-    startCommand: python backend/app.py
+    startCommand: gunicorn backend.app:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 300
     healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: WEB_CONCURRENCY
+        value: 1

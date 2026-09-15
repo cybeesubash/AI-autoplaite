@@ -2,7 +2,9 @@
 // AutoPlate AI - Complete Single Page App
 // ============================================================
 
-const API_BASE = 'http://127.0.0.1:5000';
+const API_BASE = (window.location.protocol === 'http:' || window.location.protocol === 'https:')
+    ? window.location.origin   // Same-origin: Flask serves API + frontend (works on Render too)
+    : 'http://127.0.0.1:5000';
 
 // ── Navbar & Navigation ─────────────────────────────────────
 const navbar = document.getElementById('navbar');

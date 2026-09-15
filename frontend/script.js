@@ -9,9 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function getCandidateApiUrls() {
         const list = [];
         if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-            if (window.location.port === '5000') {
-                list.push(window.location.origin);
-            } else if (window.location.hostname) {
+            // Same-origin first — Flask serves both frontend & API
+            // (works on Render, localhost:5000, and any deployed URL)
+            list.push(window.location.origin);
+            if (window.location.port !== '5000' && window.location.hostname) {
                 list.push(`${window.location.protocol}//${window.location.hostname}:5000`);
             }
         }
@@ -731,7 +732,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getApiBase() {
         if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-            if (window.location.port === '5000') return window.location.origin;
+            // Same-origin (Render/deployed URL has empty port; local Flask uses 5000)
+            if (window.location.port === '5000' || window.location.port === '') return window.location.origin;
             return `${window.location.protocol}//${window.location.hostname}:5000`;
         }
         // Opened directly from disk (file://) — use the local Flask backend
